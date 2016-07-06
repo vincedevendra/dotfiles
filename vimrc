@@ -23,6 +23,8 @@ call vundle#begin()
   Plugin 'tacahiroy/ctrlp-funky'
   Plugin 'scrooloose/syntastic'
   Plugin 'skalnik/vim-vroom'
+  Plugin 'elixir-lang/vim-elixir'
+  Plugin 'vim-airline/vim-airline-themes'
 call vundle#end()            " required
 filetype plugin indent on    " iequired
 
@@ -48,6 +50,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_elixir_checker = 1
 
 nnoremap <Leader>fu :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
