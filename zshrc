@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/vincent/.oh-my-zsh
+  export ZSH=/Users/vdevendra/.oh-my-zsh
 
 DEFAULT_USER=`whoami`
 
@@ -55,8 +55,9 @@ plugins=(git)
 
 # User configuration
 
-export PATH="/home/vincent/bin:/usr/local/heroku/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/Users/vdevendra/bin:/usr/local/heroku/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/Users/vdevendra:/Users/vdevendra/.rbenv/shims"
 # export MANPATH="/usr/local/man:$MANPATH"
+eval "$(rbenv init -)"
 
 source $ZSH/oh-my-zsh.sh
 
