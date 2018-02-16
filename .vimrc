@@ -4,7 +4,7 @@ filetype off                  " required
 runtime macros/matchit.vim
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-  Plugin 'JamshedVesuna/vim-markdown-preview'
+  Plugin 'Valloric/YouCompleteMe'
   Plugin 'janko-m/vim-test'
   Plugin 'VundleVim/Vundle.vim'
   Plugin 'tpope/vim-fugitive'
@@ -18,33 +18,72 @@ call vundle#begin()
   Plugin 'christoomey/vim-tmux-runner'
   Plugin 'christoomey/vim-tmux-navigator'
   Plugin 'tpope/vim-commentary'
-  Plugin 'vim-airline/vim-airline'
+  Plugin 'itchyny/lightline.vim'
   Plugin 'kana/vim-textobj-user'
   Plugin 'nelstrom/vim-textobj-rubyblock'
   Plugin 'floobits/floobits-neovim'
   Plugin 'tacahiroy/ctrlp-funky'
-  Plugin 'scrooloose/syntastic'
+  " Plugin 'scrooloose/syntastic'
+  Plugin 'w0rp/ale'
   Plugin 'skalnik/vim-vroom'
   Plugin 'elixir-lang/vim-elixir'
   Plugin 'vim-ruby/vim-ruby'
-  Plugin 'vim-airline/vim-airline-themes'
   Plugin 'kchmck/vim-coffee-script'
   Plugin 'tpope/vim-vinegar'
+  Plugin 'tpope/vim-abolish'
+  Plugin 'dyng/ctrlsf.vim'
+  Plugin 'tmux-plugins/vim-tmux-focus-events'
 call vundle#end()            " required
 filetype plugin indent on    " iequired
 
-syntax on
 
+let g:lightline = {
+      \'colorscheme': 'jellybeans',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste', 'modified' ],
+      \             [ 'filename' ] ],
+      \   'right': [ [ 'gitbranch' ] ]
+      \ },
+      \'component_function': {
+      \  'gitbranch': 'fugitive#head',
+      \},
+      \}
+syntax on
+" Eclim commands
+nmap <leader>ji :JavaImport<CR>
+nmap <leader>jI :JavaImportOrganize<CR>
+nmap <leader>jc :JavaCorrect<CR>
+nmap <leader>jst :Checkstyle<CR>
+nmap <leader>js :JavaSearchContext<CR>
+nmap <leader>jn :JavaRename<CR>
+nmap <leader>jr :ProjectRefresh
+autocmd Filetype java setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+
+nmap     <C-F> <Plug>CtrlSFPrompt
+vmap     <C-F>f <Plug>CtrlSFVwordPath
+vmap     <C-F>F <Plug>CtrlSFVwordExec
+nmap     <C-F>n <Plug>CtrlSFCwordPath
+nmap     <C-F>p <Plug>CtrlSFPwordPath
+nnoremap <C-F>o :CtrlSFOpen<CR>
+nnoremap <C-F>t :CtrlSFToggle<CR>
+inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+nmap     <C-F>l <Plug>CtrlSFQuickfixPrompt
+vmap     <C-F>l <Plug>CtrlSFQuickfixVwordPath
+vmap     <C-F>L <Plug>CtrlSFQuickfixVwordExec
 " show line numbers in netrw
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 
-let g:airline_theme='jellybeans'
-let g:airline_powerline_fonts = 1
+" let g:airline#extensions#branch#format = 1
+" let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+" let g:airline_theme='jellybeans'
+" let g:airline_powerline_fonts = 1
 colorscheme jellybeans
 set t_Co=256
 
 " show trailling whitsepace
 set list listchars=tab:»·,trail:·,nbsp:·
+
+set autoread
 
 if &term =~ '256color'
   " disable Background Color Erase (BCE) so that color schemes
@@ -54,9 +93,9 @@ if &term =~ '256color'
 endif
 
 " display syntax error warning in gutter
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -64,11 +103,10 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_elixir_checker = 1
 
-set clipboard+=unnamed
+set clipboard=unnamed
 
 let mapleader = "\<Space>"
 nmap 0 ^
-nmap 9 $
 nmap <leader>vr :sp $MYVIMRC<cr>
 nmap <leader>so :source $MYVIMRC<cr>
 nmap <leader>h :nohlsearch<cr>
@@ -105,13 +143,14 @@ set shiftround
 set expandtab
 
 " panes rebalance to set size on focus
-set winwidth=87
+set winwidth=120
 set winheight=5
 set winminheight=5
 set winheight=999
 
 " vim-test shortcuts
 let test#strategy = "vtr"
+let g:test#runner_commands = ['Rails']
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
@@ -130,8 +169,8 @@ set relativenumber
 set numberwidth=5
 
 " show 80 chars cutoff
-set colorcolumn=80
-set textwidth=80
+set colorcolumn=120
+set textwidth=120
 
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup
