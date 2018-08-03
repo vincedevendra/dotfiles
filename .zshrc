@@ -90,3 +90,14 @@ export NVM_DIR="/Users/vdevendra/.nvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="/usr/local/opt/qt5/bin:$PATH"
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/vdevendra/serverless-messaround/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/vdevendra/serverless-messaround/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/vdevendra/serverless-messaround/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/vdevendra/serverless-messaround/node_modules/tabtab/.completions/sls.zsh
+
+if [ -f .nvmrc ]; then
+  nvm use --silent
+fi

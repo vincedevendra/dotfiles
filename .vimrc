@@ -4,15 +4,17 @@ filetype off                  " required
 runtime macros/matchit.vim
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-  Plugin 'Valloric/YouCompleteMe'
+  Plugin 'martinda/Jenkinsfile-vim-syntax'
   Plugin 'janko-m/vim-test'
   Plugin 'VundleVim/Vundle.vim'
   Plugin 'tpope/vim-fugitive'
+  Plugin 'tpope/vim-rhubarb'
   Plugin 'flazz/vim-colorschemes'
   Plugin 'tpope/vim-rails'
   Plugin 'ctrlpvim/ctrlp.vim'
   Plugin 'tpope/vim-surround'
   Plugin 'tpope/vim-repeat'
+  Plugin 'tpope/vim-db'
   Plugin 'thoughtbot/vim-rspec'
   Plugin 'airblade/vim-gitgutter'
   Plugin 'christoomey/vim-tmux-runner'
@@ -21,9 +23,7 @@ call vundle#begin()
   Plugin 'itchyny/lightline.vim'
   Plugin 'kana/vim-textobj-user'
   Plugin 'nelstrom/vim-textobj-rubyblock'
-  Plugin 'floobits/floobits-neovim'
   Plugin 'tacahiroy/ctrlp-funky'
-  " Plugin 'scrooloose/syntastic'
   Plugin 'w0rp/ale'
   Plugin 'skalnik/vim-vroom'
   Plugin 'elixir-lang/vim-elixir'
@@ -33,11 +33,14 @@ call vundle#begin()
   Plugin 'tpope/vim-abolish'
   Plugin 'dyng/ctrlsf.vim'
   Plugin 'tmux-plugins/vim-tmux-focus-events'
+  Plugin 'pangloss/vim-javascript'
+  Plugin 'mxw/vim-jsx'
 call vundle#end()            " required
 filetype plugin indent on    " iequired
 
 
 let g:lightline = {
+      \'background': 'light',
       \'colorscheme': 'jellybeans',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste', 'modified' ],
@@ -77,7 +80,8 @@ let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 " let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 " let g:airline_theme='jellybeans'
 " let g:airline_powerline_fonts = 1
-colorscheme jellybeans
+set background=light
+colorscheme jellybeans 
 set t_Co=256
 
 " show trailling whitsepace
@@ -197,6 +201,7 @@ if executable('ag')
   "ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 end
+let g:ctrlp_cmd = 'CtrlPMixed'
 
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>if
@@ -211,3 +216,7 @@ command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
  "zoom a vim pane, <C-w>= to re-balance
  nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
  nnoremap <leader>= :wincmd =<cr>
+
+ let g:ale_lint_on_text_changed = 'never'
+ let g:ale_fixers = {}
+ let g:ale_fixers.javascript = ['eslint']
