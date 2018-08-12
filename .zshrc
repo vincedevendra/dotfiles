@@ -101,3 +101,10 @@ export PATH="/usr/local/opt/qt5/bin:$PATH"
 if [ -f .nvmrc ]; then
   nvm use --silent
 fi
+alias ber="bundle exec rake"
+alias be="bundle exec"
+alias eclimd="/Applications/Eclipse.app/Contents/Eclipse/eclimd"
+alias psql="PAGER='less -S' psql"
+alias vim="mvim -v"
+alias prettify="python -mjson.tool"
+alias grh="git reset HEAD^"
